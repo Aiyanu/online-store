@@ -22,6 +22,10 @@ public class Main {
             System.out.print("Add another item? (y/n): ");
             adding = sc.nextLine().trim().equalsIgnoreCase("y");
         }
+
+        DeliveryZone zone = readDeliveryZone();
+        OrderResult result = pricing.price(cart, zone);
+        printSummary(result);
     }
 
     private static String readName() {
@@ -87,5 +91,15 @@ public class Main {
             }
             System.out.println("Please type 0 or 1.");
         }
+    }
+
+    private static void printSummary(OrderResult result) {
+        System.out.println();
+        System.out.println("--- Order Summary ---");
+        System.out.printf("Subtotal:  %,15.2f%n", result.subtotal());
+        System.out.printf("Discount: -%,15.2f%n", result.discount());
+        System.out.printf("Delivery:  %,15.2f%n", result.deliveryFee());
+        System.out.printf("Tax:       %,15.2f%n", result.tax());
+        System.out.printf("TOTAL:     %,15.2f%n", result.total());
     }
 }

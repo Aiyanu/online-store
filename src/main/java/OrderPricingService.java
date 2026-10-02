@@ -13,24 +13,11 @@ public class OrderPricingService {
 
     static final double TAX_PERCENT = 5;
 
-    public String checkItem(String name, double price, int quantity) {
-        if (name == null || name.isBlank()) {
-            return "Name must not be blank.";
-        }
-        if (Double.isNaN(price) || price <= 0) {
-            return "Price must be a number greater than 0.";
-        }
-        if (quantity < 1) {
-            return "Quantity must be a whole number of at least 1.";
-        }
-        return null;
-    }
-
     public OrderResult price(List<Order> items, DeliveryZone zone) {
         double subtotal = calculateSubtotal(items);
         double discount = calculateDiscount(items, subtotal);
         double discounted = round2(subtotal - discount);
-        double delivery = calculateDeliveryFee(discounted, zone);
+        double delivery = calculateDeliveryFee( zone);
         double tax = calculateTax(discounted);
         double total = round2(discounted + delivery + tax);
 
@@ -63,7 +50,7 @@ public class OrderPricingService {
         return calculateAmountFromPercent(subtotal, percent);
     }
 
-    public double calculateDeliveryFee(double discountedSubtotal, DeliveryZone zone) {
+    public double calculateDeliveryFee( DeliveryZone zone) {
         if (zone == DeliveryZone.LOCAL) {
             return LOCAL_FEE;
         }

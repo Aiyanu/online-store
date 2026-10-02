@@ -1,11 +1,4 @@
 import java.util.List;
-
-/**
- * All the business rules live here. No Scanner and no System.out in this class,
- * so it can be tested without typing anything into the console.
- *
- * Order of calculation: subtotal -> discount -> delivery -> tax -> total.
- */
 public class OrderPricingService {
 
     // Discount rules

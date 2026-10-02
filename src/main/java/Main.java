@@ -94,12 +94,15 @@ public class Main {
     }
 
     private static void printSummary(OrderResult result) {
-        System.out.println();
         System.out.println("--- Order Summary ---");
-        System.out.printf("Subtotal:  %,15.2f%n", result.subtotal());
-        System.out.printf("Discount: -%,15.2f%n", result.discount());
-        System.out.printf("Delivery:  %,15.2f%n", result.deliveryFee());
-        System.out.printf("Tax:       %,15.2f%n", result.tax());
-        System.out.printf("TOTAL:     %,15.2f%n", result.total());
+        System.out.printf("Subtotal:  %15s%n", naira(result.subtotal()));
+        System.out.printf("Discount: -%15s%n", naira(result.discount()));
+        System.out.printf("Delivery:  %15s%n", naira(result.deliveryFee()));
+        System.out.printf("Tax:       %15s%n", naira(result.tax()));
+        System.out.printf("TOTAL:     %15s%n", naira(result.total()));
+    }
+
+    private static String naira(double amount) {
+        return String.format("₦%,.2f", amount);
     }
 }
